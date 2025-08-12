@@ -655,7 +655,9 @@ JSON;
     protected function setAttribute($object, string $attribute, $value): void
     {
         $attr = new \ReflectionProperty($object, $attribute);
-        $attr->setAccessible(true);
+        if (PHP_VERSION_ID < 80100) {
+            $attr->setAccessible(true);
+        }
         $attr->setValue($object, $value);
     }
 }

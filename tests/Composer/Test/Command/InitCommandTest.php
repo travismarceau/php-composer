@@ -132,7 +132,9 @@ class InitCommandTest extends TestCase
     private function callParseAuthorString(InitCommand $command, string $string): array
     {
         $reflMethod = new \ReflectionMethod($command, 'parseAuthorString');
-        $reflMethod->setAccessible(true);
+        if (PHP_VERSION_ID < 80100) {
+            $reflMethod->setAccessible(true);
+        }
 
         return $reflMethod->invoke($command, $string);
     }

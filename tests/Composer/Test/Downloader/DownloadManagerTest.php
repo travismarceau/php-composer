@@ -673,7 +673,9 @@ class DownloadManagerTest extends TestCase
 
         $manager = new DownloadManager($this->io, false, $this->filesystem);
         $method = new \ReflectionMethod($manager, 'getAvailableSources');
-        $method->setAccessible(true);
+        if (PHP_VERSION_ID < 80100) {
+            $method->setAccessible(true);
+        }
         self::assertEquals($expected, $method->invoke($manager, $target, $initial ?? null));
     }
 
