@@ -29,7 +29,9 @@ class ArchiveDownloaderTest extends TestCase
 
         $downloader = $this->getArchiveDownloaderMock();
         $method = new \ReflectionMethod($downloader, 'getFileName');
-        $method->setAccessible(true);
+        if (PHP_VERSION_ID < 80100) {
+            $method->setAccessible(true);
+        }
 
         $this->config->expects($this->any())
             ->method('get')
@@ -49,7 +51,9 @@ class ArchiveDownloaderTest extends TestCase
 
         $downloader = $this->getArchiveDownloaderMock();
         $method = new \ReflectionMethod($downloader, 'processUrl');
-        $method->setAccessible(true);
+        if (PHP_VERSION_ID < 80100) {
+            $method->setAccessible(true);
+        }
 
         $expected = 'https://github.com/composer/composer/zipball/master';
         $url = $method->invoke($downloader, $this->getMockBuilder('Composer\Package\PackageInterface')->getMock(), $expected);
@@ -65,7 +69,9 @@ class ArchiveDownloaderTest extends TestCase
 
         $downloader = $this->getArchiveDownloaderMock();
         $method = new \ReflectionMethod($downloader, 'processUrl');
-        $method->setAccessible(true);
+        if (PHP_VERSION_ID < 80100) {
+            $method->setAccessible(true);
+        }
 
         $expected = 'https://github.com/composer/composer/archive/master.tar.gz';
         $url = $method->invoke($downloader, $this->getMockBuilder('Composer\Package\PackageInterface')->getMock(), $expected);
@@ -81,7 +87,9 @@ class ArchiveDownloaderTest extends TestCase
 
         $downloader = $this->getArchiveDownloaderMock();
         $method = new \ReflectionMethod($downloader, 'processUrl');
-        $method->setAccessible(true);
+        if (PHP_VERSION_ID < 80100) {
+            $method->setAccessible(true);
+        }
 
         $expected = 'https://api.github.com/repos/composer/composer/zipball/master';
         $url = $method->invoke($downloader, $this->getMockBuilder('Composer\Package\PackageInterface')->getMock(), $expected);
@@ -100,7 +108,9 @@ class ArchiveDownloaderTest extends TestCase
 
         $downloader = $this->getArchiveDownloaderMock();
         $method = new \ReflectionMethod($downloader, 'processUrl');
-        $method->setAccessible(true);
+        if (PHP_VERSION_ID < 80100) {
+            $method->setAccessible(true);
+        }
 
         $type = strpos($url, 'tar') ? 'tar' : 'zip';
         $expected = 'https://api.github.com/repos/composer/composer/'.$type.'ball/ref';
@@ -137,7 +147,9 @@ class ArchiveDownloaderTest extends TestCase
 
         $downloader = $this->getArchiveDownloaderMock();
         $method = new \ReflectionMethod($downloader, 'processUrl');
-        $method->setAccessible(true);
+        if (PHP_VERSION_ID < 80100) {
+            $method->setAccessible(true);
+        }
 
         $url .= '.' . $extension;
         $expected = 'https://bitbucket.org/davereid/drush-virtualhost/get/ref.' . $extension;
